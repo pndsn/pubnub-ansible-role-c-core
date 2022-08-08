@@ -1,0 +1,7 @@
+---
+- name: "PubNub C Core Management"
+  hosts: "{{ global_hosts }}"
+  connection: local
+
+  roles:
+    - role: c-core-role # Run with --tags "install"

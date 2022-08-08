@@ -1,0 +1,4 @@
+---
+# tasks file for c-core-role
+- import_tasks: installed.yml
+  tags: ['never', 'install', 'deploy']
