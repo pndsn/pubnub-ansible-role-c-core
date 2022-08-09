@@ -1,0 +1,6 @@
+- name: Make Uninstall Openssl
+  ansible.builtin.shell: |
+    cd {{ openssl_temp_dest }}
+    make clean
+    make uninstall 
+  become: true

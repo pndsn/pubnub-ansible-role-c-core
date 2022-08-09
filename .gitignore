@@ -1,1 +1,4 @@
 inventory
+pubnub/
+.vscode/
+openssl/

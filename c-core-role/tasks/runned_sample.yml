@@ -1,0 +1,7 @@
+- name: Run pubnub_sync_sample
+  ansible.builtin.shell: |
+    {{ c_core_dest }}/posix/./pubnub_sync_sample
+  register: result
+
+- debug:
+    msg: "{{ result.stdout }}"

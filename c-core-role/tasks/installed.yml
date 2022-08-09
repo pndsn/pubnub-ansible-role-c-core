@@ -1,4 +1,0 @@
-- name: Install cmake using Homebrew
-  homebrew:
-    name: cmake
-    state: present

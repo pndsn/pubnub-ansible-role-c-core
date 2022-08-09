@@ -1,0 +1,13 @@
+- debug:
+    msg: "Installing PubNub at {{ c_core_dest }}"
+- name: Git Clone PubNub C Core repository
+  ansible.builtin.git:
+    repo: https://github.com/pubnub/c-core.git
+    dest: "{{ c_core_dest }}"
+
+- name: Make Install PubNub C Core
+  shell: |
+    cd {{ c_core_dest }}
+    make -f posix.mk
+  register: result
+  changed_when: '"Nothing to be done for" not in result.stdout'

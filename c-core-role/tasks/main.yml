@@ -1,4 +1,16 @@
 ---
 # tasks file for c-core-role
-- import_tasks: installed.yml
-  tags: ['never', 'install', 'deploy']
+- import_tasks: installed_cmake.yml
+  tags: ['never', 'install-cmake', 'deploy', 'deprecate']
+
+- import_tasks: installed_openssl.yml
+  tags: ['never', 'install-openssl', 'deploy']
+
+- import_tasks: uninstalled_openssl.yml
+  tags: ['never', 'uninstall-openssl', 'undeploy']
+
+- import_tasks: installed_pubnub.yml
+  tags: ['never', 'install', 'install-pubnub', 'deploy']
+
+- import_tasks: runned_sample.yml
+  tags: ['never', 'sample', 'deploy']

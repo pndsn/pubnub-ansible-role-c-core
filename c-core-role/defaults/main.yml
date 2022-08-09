@@ -1,2 +1,5 @@
 ---
 # defaults file for c-core-role
+c_core_dest: "{{ ansible_env.HOME }}"
+openssl_temp_dest: "/tmp/"
+openssl_install_dest: /usr/local/opt/openssl  # Required for pubnub/openssl/posix.mk 

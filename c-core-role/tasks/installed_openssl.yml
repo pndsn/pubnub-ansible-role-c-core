@@ -1,0 +1,35 @@
+- name: Clone Openssl 
+  ansible.builtin.git:
+    repo: https://github.com/openssl/openssl.git
+    dest: "{{ openssl_temp_dest }}"
+
+- name: Configure Openssl to PubNub MacOS M1 location
+  ansible.builtin.shell: | 
+    cd {{ openssl_temp_dest }} 
+    export MACOSX_DEPLOYMENT_TARGET=11.0
+    ./Configure darwin64-arm64-cc zlib enable-rc5 no-asm --prefix={{ openssl_install_dest }} --openssldir={{ openssl_install_dest }} '-Wl,-rpath,$(LIBRPATH)'
+  when: ansible_architecture == "arm64"
+
+- name: Configure Openssl to PubNub MacOS 64-bit location
+  ansible.builtin.shell: | 
+    cd {{ openssl_temp_dest }} 
+    ./Configure darwin64-x86_64-cc shared enable-ec_nistp_64_gcc_128 no-ssl2 no-ssl3 no-comp --prefix={{ openssl_install_dest }} --openssldir={{ openssl_install_dest }} '-Wl,-rpath,$(LIBRPATH)'
+  when: ansible_architecture == "x86_64"
+
+- name: Configure Openssl to PubNub MacOS 32-bit location 
+  ansible.builtin.shell: |
+    cd {{ openssl_temp_dest }} 
+    ./Configure darwin-i386-cc shared no-ssl2 no-ssl3 no-comp --prefix={{ openssl_install_dest }} --openssldir={{ openssl_install_dest }} '-Wl,-rpath,$(LIBRPATH)'
+  when: ansible_architecture == "i386"
+
+- name: Make Depend Openssl
+  ansible.builtin.shell: |
+    cd {{ openssl_temp_dest }}
+    make depend
+
+- name: Make Install Openssl
+  ansible.builtin.shell: |
+    cd {{ openssl_temp_dest }}
+    echo 'This will take some time'
+    make install
+  become: true
