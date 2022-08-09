@@ -1,9 +1,0 @@
-- name: Install cmake using Homebrew
-  homebrew:
-    name: cmake
-    state: present
-
-#- name: Install openssl using Homebrew
-  #homebrew:
-    #name: openssl@1.1
-    #state: present
